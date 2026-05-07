@@ -53,7 +53,7 @@ module.exports = async (req, res) => {
 
 		// Set Content type to PDF and send the PDF to the client
 		res.setHeader('Content-type', 'application/pdf')
-		res.send(pdfBuffer)
+		res.send(Buffer.from(pdfBuffer))
 
 	} catch (err) {
 		if (err.message === 'Protocol error (Page.navigate): Cannot navigate to invalid URL')
