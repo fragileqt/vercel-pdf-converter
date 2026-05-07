@@ -32,7 +32,10 @@ module.exports = async (req, res) => {
 		if (req.method !== 'GET') return res.status(405).end()
 
 		// Strip leading slash from request path
-		const url = req.url.replace(/^\/+/, '')
+		const url = req.url
+			.replace(/^\/+/, '')
+			.replace(/^https:\//i, 'https://')
+			.replace(/^http:\//i, 'http://')
 
 		// Block favicon.ico requests from reaching puppeteer
 		if (url === 'favicon.ico') return res.status(404).end()
