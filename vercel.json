@@ -1,6 +1,0 @@
-{
-	"rewrites": [
-		{ "source": "/chromium-pack.tar", "destination": "/chromium-pack.tar" },
-		{ "source": "/(.*)", "destination": "/api" }
-	]
-}

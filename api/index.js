@@ -31,14 +31,16 @@ module.exports = async (req, res) => {
 		// Only allow GET requests
 		if (req.method !== 'GET') return res.status(405).end()
 
-		// Strip leading slash from request path
-		const url = req.url
+		const queryUrl = Array.isArray(req.query?.url) ? req.query.url[0] : req.query?.url
+		const url = queryUrl || req.url
 			.replace(/^\/+/, '')
+			.replace(/^api\/?/, '')
 			.replace(/^https:\//i, 'https://')
 			.replace(/^http:\//i, 'http://')
 
 		// Block favicon.ico requests from reaching puppeteer
 		if (url === 'favicon.ico') return res.status(404).end()
+		if (!url) return res.status(400).send('Error: missing url')
 		if (!isAllowedUrl(url)) return res.status(400).send('Error: URL is not allowed')
 
 		console.log(`Converting: ${ url }`)
