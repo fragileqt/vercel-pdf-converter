@@ -1,9 +1,8 @@
 import chromium from '@sparticuz/chromium-min'
 import puppeteer from 'puppeteer-core'
 
-const chromiumPackUrl = process.env.VERCEL_PROJECT_PRODUCTION_URL
-	? `https://${ process.env.VERCEL_PROJECT_PRODUCTION_URL }/chromium-pack.tar`
-	: 'https://github.com/gabenunez/puppeteer-on-vercel/raw/refs/heads/main/example/chromium-dont-use-in-prod.tar'
+const chromiumPackUrl = process.env.CHROMIUM_PACK_URL ||
+	'https://github.com/gabenunez/puppeteer-on-vercel/raw/refs/heads/main/example/chromium-dont-use-in-prod.tar'
 
 let cachedExecutablePath = null
 let executablePathPromise = null
